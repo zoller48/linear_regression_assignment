@@ -2,6 +2,8 @@ import sys
 import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
+from scipy.stats import linregress
+import numpy as np 
 
 if len(sys.argv) != 4:
     print("Usage: python linear_regression_python.py <filename> <x_column> <y_column>")
@@ -12,15 +14,20 @@ x_col = sys.argv[2]
 y_col = sys.argv[3]
 
 data = pd.read_csv(filename)
+x = data[[x_col]].to_numpy().flatten
+y = data[[y_col]].to_numpy().flatten
+
 model = LinearRegression()
 model.fit(data[[x_col]], data[[y_col]])
-
+slope, intercept, r_value, p_value, std_err = linregress(x_col, y_col)
+y_pred = slope * x + intercept
+mse = mean_squared_error(y, y_pred)
 plt.scatter(data[[x_col]], data[[y_col]], color='red')
 plt.plot(data[[x_col]], model.predict(data[[x_col]]), color='blue')
 plt.title(f'{y_col} vs {x_col}')
 plt.xlabel(x_col)
 plt.ylabel(y_col)
-plt.savefig("linear_regression_python_output.png")
+plt.savefig("linear_regression_python_.png")
 plt.show()
 
 #!/usr/bin/env python
