@@ -1,0 +1,1 @@
+The purpose of this assignment was to play with version control in GitHub. I cloned my Assignment 2 repo, created a branch, made changes to my original Assignment 2 work, and merged the branch back to the original assignment. 
